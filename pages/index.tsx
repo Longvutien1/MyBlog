@@ -25,7 +25,6 @@ type Props = {
 const Home = ({posts}:Props) => {
 
   // console.log(posts);
-  
 
   const route = useRouter();
   useEffect(() => {

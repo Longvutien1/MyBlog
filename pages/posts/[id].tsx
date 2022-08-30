@@ -24,6 +24,13 @@ const DetailPost = (props: Props) => {
       setPost(props);
       console.log(props);
 
+    }else{
+     const listProduct = async (id:Number) => {
+      const { data } = await axios.get(`http://localhost:3000/api/post/${id}`)
+      setPost(data);
+     }
+     listProduct(Number(id));
+
     }
   }, [])
   return (
@@ -33,7 +40,7 @@ const DetailPost = (props: Props) => {
         description="A short description goes here."
         key={'MyBlog'}
       />
-      <h1> Chi tiết sản phẩm: {id}</h1>
+      <h1> Chi tiết bài viết: {id}</h1>
       <div className={styles.rowDetail}>
         <div><img src="https://picsum.photos/300/200" alt="" /></div>
         <div>
