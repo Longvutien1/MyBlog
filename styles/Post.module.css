@@ -1,0 +1,118 @@
+.container{
+    width: 80%;
+    @apply m-auto mb-10 mt-4 
+}
+
+.customers {
+    border-collapse: collapse;
+    @apply m-auto mb-10 mt-4 text-center w-full
+}
+
+
+.linkAdd {
+    @apply px-6 py-2 border  text-white   ;
+    background-color: red;
+}
+.customers td,
+.customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  
+    
+}
+
+.customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.customers tr:hover {
+    background-color: #ddd;
+}
+
+.customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: red;
+    color: white;
+  
+}
+.selectCate{
+    @apply w-5 ;
+    background-color: red;
+}
+.selectCate option{
+    @apply px-4 py-1 ;
+    background-color: #fff;
+    color: black;
+}
+
+
+/* add component */
+.form {
+    width: 700px;
+    @apply border m-auto  p-8 my-8 rounded-md shadow-2xl;
+}
+.form input{
+    @apply border w-full px-2 py-1 mb-3 outline-none ;
+}
+
+.form select{
+    @apply border mb-4 w-full px-2 py-1 outline-none
+}
+
+.form button{
+    background-color: red;
+    @apply text-white mb-4 w-full px-2 py-1;
+}
+.form button:hover{
+  
+    @apply bg-red-600 text-white mb-4 w-full px-2 py-1;
+}
+
+
+/* -----------post------------------ */
+.page{
+    @apply flex space-x-4 m-auto w-full ;
+    /* width: 80%; */
+    margin: auto
+}
+.page div{
+    @apply text-white px-3 py-1 rounded;
+    background-color: red;
+}
+.page div:hover{
+    background-color: rgb(224, 12, 12);
+    cursor: pointer;
+}
+.page p{
+    @apply  px-3 py-1 rounded border;
+    background-color:#f2f2f2 ;
+}
+.page p:hover{
+    background-color:#ccc ;
+    cursor: pointer;
+}
+
+.inputSearch{
+     @apply w-4/12  flex space-x-3;
+   
+}
+.inputSearch input{
+    @apply border rounded px-4 py-2  outline-none shadow-sm w-full;
+    border: 1px solid #ddd;
+  
+}
+.inputSearch button{
+    @apply border rounded px-4 text-white py-2  outline-none shadow-sm ;
+    background-color: red;
+    border: 1px solid #ddd;
+  
+}
+.inputSearch button:hover{
+    background-color: rgb(224, 12, 12);
+    cursor: pointer;
+}
+
+.headerPost{
+    @apply flex space-x-8 w-full mt-20
+}

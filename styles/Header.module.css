@@ -1,0 +1,16 @@
+.header{
+    @apply bg-red-600 flex justify-between space-x-3 px-20 py-4
+    text-center
+}
+.ul{
+    @apply space-x-6
+}
+.li{
+    @apply inline-block  text-white;
+    transition: all ease-in-out 0.2s;
+}
+.li:hover{
+    @apply font-bold ;
+    transition: all ease-in-out 0.2s;
+}
+

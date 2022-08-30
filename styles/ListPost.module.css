@@ -1,0 +1,33 @@
+.container{
+    width: 80%;
+    @apply m-auto mb-10 mt-4 
+}
+
+.row{
+    @apply grid grid-cols-4 gap-4
+}
+
+.col{
+    @apply p-4 border 
+}
+
+.title{
+    @apply py-2 font-bold cursor-pointer ;
+    color:red
+}
+
+
+/* detail Posst */
+
+.rowDetail{
+    @apply flex  gap-8
+}
+
+.viewAndLikes{
+    @apply flex gap-4
+}
+
+.btnLike{
+    @apply my-4 px-4 py-1 text-white rounded;
+    background-color: red;
+}
