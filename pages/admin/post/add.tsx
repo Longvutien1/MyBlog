@@ -2,8 +2,11 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
 import AdminLayout from '../../../component/Layout/admin'
+import { getUser } from '../../../features/user/userSlice'
 import styles from '../../../styles/Post.module.css'
+// import { getUser } from '../../features/user/userSlice'
 type FormInput = {
     title: string,
     userId: number,
@@ -13,19 +16,29 @@ type FormInput = {
 
 const AddPost = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormInput>();
-    const user = JSON.parse(localStorage.getItem("user") as string) ? JSON.parse(localStorage.getItem("user") as string) : null;
-    const router = useRouter(); 
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const user = useSelector((item: any) => item.user.value)
     // console.log(user);
-    
+
+    useEffect(() => {
+        const userDetail = async () => {
+            const { payload } = await dispatch(getUser())
+            console.log(payload);
+            // setUser(payload)
+
+        }
+        userDetail();
+    }, [])
     const onSubmit = async (value: any) => {
         console.log(value);
-        const {data} = await axios.post("http://localhost:3000/api/post/",{...value, userId: user?.id})
+        const { data } = await axios.post("http://localhost:3000/api/post/", { ...value, userId: user?.id })
         if (data) {
             alert("Thêm thành công")
             router.push("/admin/post")
         }
     }
-    
+
     return (
         <div className={styles.form}>
             <h2 className='text-2xl font-bold my-8'>Thêm bài viết</h2>
@@ -50,8 +63,8 @@ const AddPost = () => {
                     </select>
                     {errors.categoryPost?.message && <span style={{ color: "Red" }}>{errors.categoryPost?.message}</span>}
                 </p>
-               
-               <button>Thêm </button>
+
+                <button>Thêm </button>
             </form>
 
         </div>

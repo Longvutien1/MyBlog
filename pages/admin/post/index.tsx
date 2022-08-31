@@ -8,8 +8,6 @@ import AdminLayout from '../../../component/Layout/admin'
 import { getPostList } from '../../../serviceClient/post'
 import styles from '../../../styles/Post.module.css'
 import { PostType } from '../../../type/types'
-import { getListPost } from '../../features/product/productSlide'
-// import { getListPost, getListPostByCategoryPost, getListPostBySearchTitle } from '../../features/product/productSlide'
 type FormInputs = {
   title: string,
 
@@ -118,7 +116,7 @@ const ListPost = () => {
                 </form>
               </th>
               <th>Người đăng bài</th>
-              <th>Bình luận</th>
+              <th>Comments</th>
               <th>Lượt xem</th>
               <th>Thích</th>
               <th>Hành động</th>
@@ -126,10 +124,10 @@ const ListPost = () => {
             {listPost?.listPost?.map((item: PostType, index: number) => {
               return (<tr key={index + 1}>
                 <td>{index + 1}</td>
-                <td>{item.title}</td>
+                <td  style={{maxWidth:"200px"}}>{item.title}</td>
                 <td>{item.categoryPost}</td>
                 <td>{item.user.name}</td>
-                <td>{item.comments}</td>
+                <td style={{maxWidth:"300px", textAlign:"left"}}>{item.comments}</td>
                 <td>{item.views}</td>
                 <td>{item.likes}</td>
                 <td className='space-x-4 text-center'>

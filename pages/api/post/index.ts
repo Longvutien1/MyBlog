@@ -39,8 +39,6 @@ export default async function handler(
           return res.status(200).json({ lisstAllPosts, count });
         }
 
-
-
         if (categoryPost != "undefined" || title != "undefined") {
           const condion = alterQuery(String(title), String(categoryPost));
 

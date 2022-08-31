@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import  postSlide  from '../features/product/productSlide'
-// import PostSlide from '../features/product/productSlide'
+import  postSlide  from '../features/product/productSlice'
+import userSlice from '../features/user/userSlice'
+
 
 export const store = configureStore({
   reducer: {
     post: postSlide,
+    user: userSlice
   },
 })
 

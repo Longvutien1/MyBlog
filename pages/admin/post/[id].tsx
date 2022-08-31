@@ -12,7 +12,6 @@ type FormInput = {
 }
 const DetailPost = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormInput>();
-  const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null;
   const router = useRouter(); 
   const { id } = router.query;
   // console.log(id);

@@ -1,5 +1,5 @@
 import React from 'react'
-import { LayoutProps } from '../../pages/models/Layout'
+import { LayoutProps } from '../../models/Layout'
 import Header from '../Header'
 
 const AdminLayout = ({ children }: LayoutProps) => {

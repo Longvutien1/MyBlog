@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/router';
 import React from 'react'
 import * as yup from 'yup';
@@ -30,6 +31,7 @@ const Login = () => {
     const route = useRouter();
     const onSubmit: SubmitHandler<FormInputs> = async (value) => {
         console.log(value);
+        
         const { data } = await axios.post("http://localhost:3000/api/auth/signin", {
             email: value.email,
             password: value.password,
