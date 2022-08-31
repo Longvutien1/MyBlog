@@ -6,7 +6,7 @@ export const getListPost:any = createAsyncThunk(
   "post/getListPost",
    async (index:number) => {
      try {
-      const {data} = await axios.get(`http://localhost:3000/api/post?skip=${index}`);
+      const {data} = await axios.get(`/api/post?skip=${index}`);
       return data
      } catch (error) {
       console.log(error);
@@ -18,7 +18,7 @@ export const getListPost:any = createAsyncThunk(
 //   "post/getListPostBySearchTitle",
 //    async (search:number) => {
 //      try {
-//       const {data} = await axios.get(`http://localhost:3000/api/post?title=${search}`);
+//       const {data} = await axios.get(`/api/post?title=${search}`);
 //       return data
 //      } catch (error) {
 //       console.log(error);
@@ -31,7 +31,7 @@ export const getListPost:any = createAsyncThunk(
 //   "post/getListPostByCategoryPost",
 //    async (categoryPost:string) => {
 //      try {
-//       const {data} = await axios.get(`http://localhost:3000/api/post?categoryPost=${categoryPost}`);
+//       const {data} = await axios.get(`/api/post?categoryPost=${categoryPost}`);
 //       return data
 //      } catch (error) {
 //       console.log(error);

@@ -40,6 +40,9 @@ const Header = () => {
         {/* {!user ? <li className={styles.li}><Link href="/login">Đăng nhập</Link></li> : ""} 
         {!user ? <li className={styles.li}><Link href="/register">Đăng kí</Link></li> : ""} 
         {user ? <li className={styles.li}><button onClick={() => logout()}>Đăng xuất</button> </li> : ""}  */}
+         <li className={styles.li}><Link href="/login">Đăng nhập</Link></li>
+         <li className={styles.li}><Link href="/register">Đăng kí</Link></li>
+         <li className={styles.li}><button onClick={() => logout()}>Đăng xuất</button> </li> 
       </ul>
     </div>
   )

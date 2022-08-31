@@ -32,7 +32,7 @@ const Login = () => {
     const onSubmit: SubmitHandler<FormInputs> = async (value) => {
         console.log(value);
         
-        const { data } = await axios.post("https://blmbabnrivivvzgbvvjb.supabase.co/api/auth/signin", {
+        const { data } = await axios.post("/api/auth/signin", {
             email: value.email,
             password: value.password,
         });

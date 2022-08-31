@@ -17,7 +17,7 @@ const ListPostHomePage = () => {
         
     // }
     const fetchData = async () => {
-        const { data } = await axios.get(`http://localhost:3000/api/post?allPost=1`)
+        const { data } = await axios.get(`/api/post?allPost=1`)
         // console.log(data);
 
         setListPost(data.lisstAllPosts)
@@ -59,7 +59,7 @@ const ListPostHomePage = () => {
 
 // export const getStaticProps: GetStaticProps<PostProps> = async () => {
     
-//     const { data } = await axios.get(`http://localhost:3000/api/post?allPost=1`)
+//     const { data } = await axios.get(`/api/post?allPost=1`)
 //     // const posts = await res.json();
 //     console.log("call API data: ",data);
     

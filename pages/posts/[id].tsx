@@ -37,7 +37,7 @@ const DetailPost = () => {
     //   console.log(props.views);
 
     //   const addView = async () => {
-    //     const { data } = await axios.patch(`http://localhost:3000/api/post/${id}?views=${props?.views}`)
+    //     const { data } = await axios.patch(`/api/post/${id}?views=${props?.views}`)
     //     setPost(data)
     //   }
     //   addView()
@@ -45,9 +45,9 @@ const DetailPost = () => {
 
     // } else {
       const listProduct = async (id: Number) => {
-        const detailPost = await axios.get(`http://localhost:3000/api/post/${id}`)
+        const detailPost = await axios.get(`/api/post/${id}`)
 
-        const { data } = await axios.patch(`http://localhost:3000/api/post/${id}?views=${detailPost.data.views}`)
+        const { data } = await axios.patch(`/api/post/${id}?views=${detailPost.data.views}`)
         setPost(data)
         // setPost(data);
       }
@@ -60,7 +60,7 @@ const DetailPost = () => {
   const likePost = async () => {
     console.log("check like");
 
-    const { data } = await axios.patch(`http://localhost:3000/api/post/${id}?likes=${post?.likes}&userId=${user?.id}`)
+    const { data } = await axios.patch(`/api/post/${id}?likes=${post?.likes}&userId=${user?.id}`)
     setPost(data.data)
     setLiked(data.message)
 
@@ -91,22 +91,22 @@ const DetailPost = () => {
             <h1>Social Share </h1>
             <div>
               <FacebookShareButton
-                url={`http://localhost:3000/posts/${id}`} >
+                url={`/posts/${id}`} >
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
 
               <PinterestShareButton
                 media={''}
                 description={"Printerest Long"}
-                url={`http://localhost:3000/posts/${id}`} >
+                url={`/posts/${id}`} >
                 <PinterestIcon size={32} round />
               </PinterestShareButton>
               <RedditShareButton
-                 url={`http://localhost:3000/posts/${id}`} >
+                 url={`/posts/${id}`} >
                 <RedditIcon size={32} round />
               </RedditShareButton>
               <WhatsappShareButton
-                 url={`http://localhost:3000/posts/${id}`} >
+                 url={`/posts/${id}`} >
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
             </div>
@@ -163,7 +163,7 @@ export default DetailPost
 // export const getStaticPaths: GetStaticPaths = async () => {
 
 
-//   const { data } = await axios.get(`http://localhost:3000/api/post?allPost=1`)
+//   const { data } = await axios.get(`/api/post?allPost=1`)
 //   console.log("data,listPost: ", data.lisstAllPosts);
 //   const paths = data.lisstAllPosts?.map((product: any) => ({ params: { id: String(product.id) } }));
 //   console.log(paths);
@@ -179,7 +179,7 @@ export default DetailPost
 //   context: GetStaticPropsContext
 // ) => {
 //   console.log("context", context);
-//   const { data } = await axios.get(`http://localhost:3000/api/post/${context.params?.id}`);
+//   const { data } = await axios.get(`/api/post/${context.params?.id}`);
 //   console.log("data chi tiết: ", data);
 
 //   return {

@@ -23,7 +23,7 @@ const ListPost = () => {
 
   useEffect(() => {
     const list = async () => {
-      const { data } = await axios.get(`http://localhost:3000/api/post`)
+      const { data } = await axios.get(`/api/post`)
 
       setListPost(data)
     }
@@ -34,7 +34,7 @@ const ListPost = () => {
   const removePost = async (id: number) => {
     const confirm = window.confirm("Bạn có chắc muốn xóa bài viết này không ?")
     if (confirm) {
-      const { data } = await axios.delete(`http://localhost:3000/api/post/${id}`)
+      const { data } = await axios.delete(`/api/post/${id}`)
       // console.log(data);
       alert(data.message)
       // dispatch(getListPost(0))

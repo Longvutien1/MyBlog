@@ -18,7 +18,7 @@ const DetailPost = () => {
   useEffect(() => {
     if (id) {
       const getPostById = async (id: number) => {
-        const { data } = await axios.get(`http://localhost:3000/api/post/${id}`)
+        const { data } = await axios.get(`/api/post/${id}`)
         console.log("data post: ", data);
         reset(data)
       }
@@ -28,7 +28,7 @@ const DetailPost = () => {
 
   const onSubmit = async (value: any) => {
     console.log(value);
-    const  {data} = await axios.patch(`http://localhost:3000/api/post/${id}`, { title:value.title, comments: value.comments,categoryPost:value.categoryPost  })
+    const  {data} = await axios.patch(`/api/post/${id}`, { title:value.title, comments: value.comments,categoryPost:value.categoryPost  })
     if (data) {
       console.log(data);
       

@@ -32,7 +32,7 @@ const AddPost = () => {
     }, [])
     const onSubmit = async (value: any) => {
         console.log(value);
-        const { data } = await axios.post("http://localhost:3000/api/post/", { ...value, userId: user?.id })
+        const { data } = await axios.post("/api/post/", { ...value, userId: user?.id })
         if (data) {
             alert("Thêm thành công")
             router.push("/admin/post")

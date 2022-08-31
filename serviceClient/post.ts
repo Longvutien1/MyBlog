@@ -8,7 +8,7 @@ interface ApiPostType  {
 export const getPostList = async (mang:any) => {
     console.log(mang.page);
     
-    const { data } = await axios.get(`http://localhost:3000/api/post?page=${mang.page}&title=${mang.title}&categoryPost=${mang.categoryPost}`);
+    const { data } = await axios.get(`/api/post?page=${mang.page}&title=${mang.title}&categoryPost=${mang.categoryPost}`);
     
     return {data}
 }

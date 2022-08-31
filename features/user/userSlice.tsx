@@ -6,7 +6,7 @@ export const getUser:any = createAsyncThunk(
   "user/getUser",
    async () => {
      try {
-      const { data } = await axios.get(`http://localhost:3000/api/auth/signin`)
+      const { data } = await axios.get(`/api/auth/signin`)
       return data
      } catch (error) {
       console.log(error);
@@ -18,7 +18,7 @@ export const login:any = createAsyncThunk(
   "user/login",
    async (user:any) => {
      try {
-      const {data} = await axios.post(`http://localhost:3000/api/auth/signin`,user);
+      const {data} = await axios.post(`/api/auth/signin`,user);
       return data
      } catch (error) {
       console.log(error);
@@ -31,7 +31,7 @@ export const login:any = createAsyncThunk(
 //   "post/getListPostByCategoryPost",
 //    async (categoryPost:string) => {
 //      try {
-//       const {data} = await axios.get(`http://localhost:3000/api/post?categoryPost=${categoryPost}`);
+//       const {data} = await axios.get(`/api/post?categoryPost=${categoryPost}`);
 //       return data
 //      } catch (error) {
 //       console.log(error);

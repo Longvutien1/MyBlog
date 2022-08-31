@@ -16,7 +16,7 @@ const Home = () => {
   const route = useRouter();
   useEffect(() => {
     const getToken = async () => {
-      const {data} = await axios.get("http://localhost:3000/api/auth/signin")
+      const {data} = await axios.get("/api/auth/signin")
       
         if (data.message) {
             // alert(data.message)
@@ -46,7 +46,7 @@ export default Home
 // export const getStaticProps: GetStaticProps<Props> = async () => {
 //   // console.log("abc");
   
-//   const { data } = await axios.get(`http://localhost:3000/api/post?allPost=1`)
+//   const { data } = await axios.get(`/api/post?allPost=1`)
 //   // const posts = await res.json();
 //   console.log("getStaticProps: ",data);
   

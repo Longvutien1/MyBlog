@@ -40,7 +40,7 @@ const Register = () => {
     const onSubmit: SubmitHandler<FormInputs> = async (value) => {
         console.log(value);
 
-        const { data } = await axios.post("http://localhost:3000/api/auth/signup", {
+        const { data } = await axios.post("/api/auth/signup", {
             name: value.name,
             email: value.email,
             password: value.password,
