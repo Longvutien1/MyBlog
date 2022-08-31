@@ -24,14 +24,16 @@ export default async function handler(
             email: user.email,
           },
         });
+
+        console.log("existUser", existUser);
         if (!existUser) {
-          return res.json({ message: "Tài khoản không tồn tại" });
+          return res.status(200).json({ message: "Tài khoản không tồn tại" });
         }
 
         const match = await bcrypt.compare(user.password, existUser.password);
-        // console.log(match);
+        console.log("matchmatchmatch", match);
         if (match == false) {
-          return res.json({
+          return res.status(200).json({
             message: "Mật khẩu không đúng",
           });
         }
@@ -40,14 +42,21 @@ export default async function handler(
         const token = jwt.sign(existUser, "123456", {
           expiresIn: "12h",
         });
-        
+
         // console.log("token: ",token);
 
         if (existUser && match == true) {
-          setCookie("cookieUser", token, { req, res, maxAge: 60 * 60 * 24 * 1 });
+          setCookie("cookieUser", token, {
+            req,
+            res,
+            maxAge: 60 * 60 * 24 * 1,
+          });
           res.setHeader("userToken", token);
-          res.json({ message: "Đăng nhập thành công" });
+          return res.status(200).json({ message: "Đăng nhập thành công" });
         }
+
+        console.log("check login");
+
         break;
 
       case "GET":
@@ -56,14 +65,14 @@ export default async function handler(
         const tokenHeader = req.headers.cookie;
         var cookies = cookie.parse(tokenHeader || "");
         // console.log("token cookie:", cookies.cookieUser);
-        
+
         if (cookies.cookieUser) {
           // giải mã hóa token
           var decoded = jwt.verify(`${cookies.cookieUser}`, "123456");
           // console.log("giai mã: ", decoded); // bar
           res.json(decoded);
         } else {
-          res.json({message:"Hết hạn cookie"});
+          res.json({ message: "Hết hạn cookie" });
         }
         break;
       default:
