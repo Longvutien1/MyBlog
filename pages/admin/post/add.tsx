@@ -10,7 +10,7 @@ import styles from '../../../styles/Post.module.css'
 type FormInput = {
     title: string,
     userId: number,
-    comments: string,
+    content: string,
     categoryPost: string
 }
 
@@ -48,9 +48,9 @@ const AddPost = () => {
                 {errors.title?.message && <span style={{ color: "Red" }}>{errors.title?.message}</span>}
 
                 <p>
-                    <label htmlFor="comments">Comment:</label><br />
-                    <input type="text" id="comments" {...register("comments", { required: "Không được để trống!" })} /><br />
-                    {errors.comments?.message && <span style={{ color: "Red" }}>{errors.comments?.message}</span>}
+                    <label htmlFor="content">Nội dung:</label><br />
+                    <input type="text" id="content" {...register("content", { required: "Không được để trống!" })} /><br />
+                    {errors.content?.message && <span style={{ color: "Red" }}>{errors.content?.message}</span>}
                 </p>
                 <p>
                     <label htmlFor="categoryPost">Chọn loại bài viết:</label>

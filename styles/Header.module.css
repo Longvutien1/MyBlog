@@ -1,16 +1,19 @@
 .header{
-    @apply bg-red-600 flex justify-between space-x-3 px-20 py-4
-    text-center
+    @apply  flex justify-between space-x-3  py-4
+    text-center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 80%;
+    margin: auto;
 }
 .ul{
-    @apply space-x-6
+    @apply space-x-6 flex my-auto
 }
 .li{
-    @apply inline-block  text-white;
-    transition: all ease-in-out 0.2s;
+    @apply inline-block  my-auto;
+    /* transition: al/all ease-in-out 0.2s; */
 }
 .li:hover{
     @apply font-bold ;
-    transition: all ease-in-out 0.2s;
+    /* transition: all ease-in-out 0.2s; */
 }
 

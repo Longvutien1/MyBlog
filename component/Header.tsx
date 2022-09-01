@@ -32,11 +32,13 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <ul className={styles.ul}>
+        <li className='font-bold text-3xl'>MyBlog</li>
         <li className={styles.li}><Link href="/">Trang chủ</Link></li>
         {user?.role == 'ADMIN' ? <li className={styles.li}><Link href="/admin/post">Admin</Link></li> : ""}
       </ul>
       
       <ul className={styles.ul}>
+       
         <li className={styles.li}>Hello {user != null ? user?.name : ""}</li>
         {!user ? <li className={styles.li}><Link href="/login">Đăng nhập</Link></li> : ""} 
         {!user ? <li className={styles.li}><Link href="/register">Đăng kí</Link></li> : ""} 

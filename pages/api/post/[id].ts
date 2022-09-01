@@ -37,6 +37,9 @@ export default async function handler(
           const editPost = await prisma.post.update({
             where: { id: Number(idQueryUpdate) },
             data: { views: Number(views) + 1 },
+           include:{
+            user:true
+           }
           });
 
           // console.log("data +", editPost);
@@ -52,7 +55,9 @@ export default async function handler(
               isLike: {
                 has: String(userId),
               },
+              
             },
+            
           });
           // console.log("userIsExist", userIsExist?.isLike);
           // console.log("userIsExist", userIsExist.length);
@@ -67,7 +72,11 @@ export default async function handler(
                 likes: {
                   set: Number(likes) - 1,
                 },
+                
               },
+              include:{
+                user:true
+              }
             });
             // console.log("isLikesisLikesisLikesisLikes", updateLike);
             return res.status(201).json({data:updateLike, mesage:"Thích"});
@@ -83,6 +92,9 @@ export default async function handler(
                   set: Number(likes)+1,
                 },
               },
+              include:{
+                user:true
+              }
             });
             // console.log("isLikes23222 +", updateLike);
             return res.status(201).json({data:updateLike, message:"Đã thích"});

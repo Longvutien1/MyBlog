@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import ListPostHomePage from './posts'
 import { PostType } from '../type/types'
-
+import Banner from '../component/Banner'
 type Props = {
   posts: PostType
 }
@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <div>
-    
+      <Banner/>
       <ListPostHomePage/>
     </div>
   )

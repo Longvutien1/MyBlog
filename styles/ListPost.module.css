@@ -1,21 +1,59 @@
 .container{
     width: 80%;
-    @apply m-auto mb-10 mt-4 
+    @apply m-auto mb-10 py-16
 }
 
 .row{
-    @apply grid grid-cols-4 gap-4
+    @apply grid grid-cols-7 gap-16
 }
 
+.col3{
+    @apply  col-span-5 text-center
+}
+.col1{
+    @apply col-span-2
+}
 .col{
-    @apply p-4 border 
+    @apply bg-white mb-12 py-16
 }
 
 .title{
-    @apply py-2 font-bold cursor-pointer ;
-    color:red
+    @apply  font-medium text-2xl cursor-pointer ;
+    /* color:red */
+}
+.categoryPost{
+    @apply mb-8 mt-4
 }
 
+.contentPost{
+    @apply text-left px-16 my-8
+}
+
+.tacGiaAndViews{
+    @apply flex justify-between px-16
+}
+.tacGiaAndViews p{
+    @apply text-left text-gray-800
+}
+
+.btnDetailPost{
+    @apply border py-2 px-4 rounded my-4;
+    border: 1px solid #000
+}
+.btnDetailPost:hover{
+    @apply text-white bg-black;
+    
+}
+
+.avatar{
+    @apply   text-center max-w-full max-h-full ;
+    width: 100%;
+    height: auto;
+}
+
+.topViews{
+    @apply bg-white text-center px-8 py-8
+}
 
 /* detail Posst */
 
@@ -33,6 +71,9 @@
 }
 
 /* share */
+.share {
+    @apply text-left mt-4 px-16 flex gap-4
+}
 .share div{
     @apply my-2 flex gap-3
 }
@@ -46,6 +87,9 @@
     @apply text-2xl font-bold mb-2  ;
    
   } */
+  .comment{
+    @apply bg-white p-16 
+  }
    .content{
     @apply py-2 border-b
   }

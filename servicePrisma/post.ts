@@ -63,3 +63,19 @@ export const listAllPost = async () => {
 
   return { lisstAllPosts, count };
 };
+
+
+export const listTopViews = async (top3View:Number) => {
+  const listPost = await prisma.post.findMany({
+    skip:  0,
+    take: Number(top3View),
+    include: {
+      user: true,
+    },
+    orderBy: {
+      views: "desc",
+    },
+  });
+
+  return { listPost };
+};

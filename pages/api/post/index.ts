@@ -5,6 +5,7 @@ import {
   listAllPost,
   listAllPostAdmin,
   listPostPrisma,
+  listTopViews,
 } from "../../../servicePrisma/post";
 
 interface QueryParam {
@@ -25,20 +26,21 @@ export default async function handler(
         const data = await prisma.post.create({
           data: post,
         });
-        res.status(201).json(data);
+        return res.status(201).json(data);
         break;
 
       case "GET":
-        const { title, categoryPost, page, allPost } = req.query;
+        const { title, categoryPost, page, allPost, topview } = req.query;
         if (allPost) {
-          // console.log("allPost", allPost);
 
           const { lisstAllPosts, count } = await listAllPost();
-          // console.log(lisstAllPosts, count);
 
           return res.status(200).json({ lisstAllPosts, count });
         }
-
+        if (topview) {
+          const { listPost } = await listTopViews(Number(topview));
+          return res.status(200).json(listPost);
+        }
         if (categoryPost != "undefined" || title != "undefined") {
           const condion = alterQuery(String(title), String(categoryPost));
 
@@ -55,7 +57,6 @@ export default async function handler(
           return res.status(200).json({ listPost, count });
         }
 
-       
         break;
 
       default:

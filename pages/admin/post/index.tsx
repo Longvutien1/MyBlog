@@ -116,7 +116,7 @@ const ListPost = () => {
                 </form>
               </th>
               <th>Người đăng bài</th>
-              <th>Comments</th>
+              <th>Nội dung</th>
               <th>Lượt xem</th>
               <th>Thích</th>
               <th>Hành động</th>
@@ -127,7 +127,7 @@ const ListPost = () => {
                 <td  style={{maxWidth:"200px"}}>{item.title}</td>
                 <td>{item.categoryPost}</td>
                 <td>{item.user.name}</td>
-                <td style={{maxWidth:"300px", textAlign:"left"}}>{item.comments}</td>
+                <td style={{maxWidth:"300px", textAlign:"left"}}>{item.content}</td>
                 <td>{item.views}</td>
                 <td>{item.likes}</td>
                 <td className='space-x-4 text-center'>
@@ -151,7 +151,7 @@ const ListPost = () => {
       
           <div className={`next ${pageNow + 1 >=  Number(listPost.count / 3) ? "hidden" : ""}`} onClick={() => changePage(Number(pageNow) + 1)}> Next </div>
         </div>
-
+          
       </section>
     </div>
   )
