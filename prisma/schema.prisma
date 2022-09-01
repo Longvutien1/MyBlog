@@ -1,11 +1,10 @@
-// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -15,15 +14,13 @@ model User {
   password     String
   profileViews Int              @default(0)
   role         Role             @default(USER)
-  // coinflips    Boolean[]        
-  posts        Post[]
   city         String?
   country      String?
+  createdAt    DateTime?        @default(now()) @map("created_at")
+  updatedAt    DateTime?        @updatedAt @map("updated_at")
+  comments     Comment[]
   profile      ExtendedProfile?
-
-  createdAt DateTime? @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
-  comments   Comment[]
+  posts        Post[]
 }
 
 model ExtendedProfile {
@@ -39,26 +36,25 @@ model Post {
   content      String
   categoryPost String
   published    Boolean   @default(true)
-  user         User      @relation(fields: [userId], references: [id])
   userId       Int
-  comments     Comment[] 
   views        Int       @default(0)
   likes        Int       @default(0)
   isLike       String[]  @default([])
-  createdAt    DateTime? @default(now()) @map(name: "created_at")
-  updatedAt    DateTime? @updatedAt @map(name: "updated_at")
+  createdAt    DateTime? @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
+  user         User      @relation(fields: [userId], references: [id])
+  comments     Comment[]
 }
 
 model Comment {
-  id      Int    @id @default(autoincrement())
-  content String 
-  user    User   @relation(fields: [userId], references: [id])
-  userId  Int
-  post    Post   @relation(fields: [idPost], references: [id])
-  idPost  Int
-
-  createdAt DateTime? @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  id        Int       @id @default(autoincrement())
+  content   String
+  userId    Int
+  idPost    Int
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  post      Post      @relation(fields: [idPost], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 enum Role {
