@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import styles from '../styles/Header.module.css'
 const Header = () => {
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<any>(null);
   const route = useRouter();
   // const dispatch = useDispatch();
   useEffect(() => {
@@ -39,7 +39,7 @@ const Header = () => {
       
       <ul className={styles.ul}>
        
-        <li className={styles.li}>Hello {user != null ? user?.name : ""}</li>
+        <li className={styles.li}> {user?.message !== "Hết hạn cookie" ? ` ${'Hello ' + user?.name}` : ""}</li>
         {!user ? <li className={styles.li}><Link href="/login">Đăng nhập</Link></li> : ""} 
         {!user ? <li className={styles.li}><Link href="/register">Đăng kí</Link></li> : ""} 
         {user?.message !== "Hết hạn cookie"  ? <li className={styles.li}><button onClick={() => logout()}>Đăng xuất</button> </li> : ""} 

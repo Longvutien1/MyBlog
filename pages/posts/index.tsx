@@ -12,6 +12,7 @@ import { GetServerSideProps, GetStaticProps } from 'next';
 import { getPostList } from '../../serviceClient/post';
 import Info from '../../component/Info';
 import TopViewPost from '../../component/TopViewPost';
+import {  countCharacters300 } from '../../middleware';
 type PostProps = {
     posts: PostType
 }
@@ -75,7 +76,7 @@ const ListPostHomePage = () => {
                                     <p className={styles.title}> {item.title}</p>
                                     <h2 className={styles.categoryPost}> Loại bài viết / {item.categoryPost}</h2>
                                     <img src="https://picsum.photos/1000/600" width={"100%"} alt="" />
-                                    <p className={styles.contentPost}>{item.content}</p>
+                                    <p className={styles.contentPost}>{countCharacters300(item.content)}</p>
                                     <div className={styles.tacGiaAndViews}>
                                         <p >Tác giả: {item.user.name} </p>
 

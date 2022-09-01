@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/prisma";
+import { postById, updateView } from "../../../servicePrisma/post";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,14 +16,7 @@ export default async function handler(
         const { id: idQuery } = req.query;
         // console.log(idQuery);
 
-        const post = await prisma.post.findFirst({
-          where: {
-            id: Number(idQuery),
-          },
-          include: {
-            user: true,
-          },
-        });
+        const {post} = await postById(Number(idQuery))
         // console.log("listPost: ",listPost);
 
         res.status(200).json(post);
@@ -30,24 +24,12 @@ export default async function handler(
       case "PATCH":
         const data = req.body;
         const { id: idQueryUpdate, views, likes, userId } = req.query;
-        // console.log("views", views);
-        // console.log(likes, userId);
-
+  
         if (views) {
-          const editPost = await prisma.post.update({
-            where: { id: Number(idQueryUpdate) },
-            data: { views: Number(views) + 1 },
-           include:{
-            user:true
-           }
-          });
-
-          // console.log("data +", editPost);
+          const {editPost} = await updateView(Number(idQueryUpdate), Number(views));
           res.status(201).json(editPost);
         }
-
         if (likes) {
-          // console.log("likes, userId:  ", likes, userId);
 
           const userIsExist = await prisma.post.findFirst({
             where: {
@@ -59,8 +41,7 @@ export default async function handler(
             },
             
           });
-          // console.log("userIsExist", userIsExist?.isLike);
-          // console.log("userIsExist", userIsExist.length);
+        
 
           if (userIsExist?.isLike !== undefined) {
             const updateLike = await prisma.post.update({
@@ -104,6 +85,8 @@ export default async function handler(
         }
 
         if (data) {
+          console.log("datadadd",data);
+          
           const editPost = await prisma.post.update({
             where: { id: Number(idQueryUpdate) },
             data: data,

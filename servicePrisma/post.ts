@@ -79,3 +79,69 @@ export const listTopViews = async (top3View:Number) => {
 
   return { listPost };
 };
+
+// getPostbyId
+export const postById = async (idQuery:Number) => {
+  const post = await prisma.post.findFirst({
+    where: {
+      id: Number(idQuery),
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  return { post };
+};
+
+// update view
+export const updateView = async (idQueryUpdate:Number, views:Number) => {
+  const editPost = await prisma.post.update({
+    where: { id: Number(idQueryUpdate) },
+    data: { views: Number(views) + 1 },
+   include:{
+    user:true
+   }
+  });
+
+
+  return { editPost };
+};
+
+
+// likePost 
+export const findUser = async (idQueryUpdate:Number,userId:String) => {
+  const userIsExist = await prisma.post.findFirst({
+    where: {
+      id: Number(idQueryUpdate),
+      isLike: {
+        has: String(userId),
+      },
+      
+    },
+    
+  });
+
+  return userIsExist;
+};
+
+// delete Like
+// export const removeLike = async (userIsExist:any,idQueryUpdate:Number, userId:Number, likes:Number) => {
+//   const updateLike = await prisma.post.update({
+//     where: { id: Number(idQueryUpdate) },
+//     data: {
+//       isLike: {
+//         set: userIsExist?.isLike.filter((item:any) => item !== userId),
+//       },
+//       likes: {
+//         set: Number(likes) - 1,
+//       },
+      
+//     },
+//     include:{
+//       user:true
+//     }
+//   });
+
+//   return updateLike;
+// };

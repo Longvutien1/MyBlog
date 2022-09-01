@@ -2,6 +2,7 @@
 import axios from 'axios'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
+import { countCharacters100 } from '../middleware';
 import styles from '../styles/ListPost.module.css'
 import { PostType } from '../type/types';
 const TopViewPost = () => {
@@ -26,7 +27,7 @@ const TopViewPost = () => {
                         <Link href={`/posts/${item.id}`}><img src="https://picsum.photos/300/200" width={"100%"} alt="" /></Link>
                         <div className='text-left my-2 ' style={{ marginTop: "8px" }}>
                         <Link href={`/posts/${item.id}`}><p className='font-medium mt-4 mb-2 hover:cursor-pointer'>{item.title}</p></Link>
-                            <p className='text-sm'>{item.content}</p>
+                            <p className='text-sm'>{countCharacters100(item.content)}</p>
                         </div>
                     </div>
                 )

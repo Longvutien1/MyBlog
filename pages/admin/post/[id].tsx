@@ -7,7 +7,7 @@ import styles from '../../../styles/Post.module.css'
 type FormInput = {
   title: string,
   userId: number,
-  comments: string,
+  content: string,
   categoryPost: string
 }
 const DetailPost = () => {
@@ -24,11 +24,11 @@ const DetailPost = () => {
       }
       getPostById(Number(id));
     }
-  }, [])
+  }, [id])
 
   const onSubmit = async (value: any) => {
     console.log(value);
-    const  {data} = await axios.patch(`/api/post/${id}`, { title:value.title, comments: value.comments,categoryPost:value.categoryPost  })
+    const  {data} = await axios.patch(`/api/post/${id}`, { title:value.title, content: value.content,categoryPost:value.categoryPost  })
     if (data) {
       console.log(data);
       
@@ -46,9 +46,9 @@ const DetailPost = () => {
         {errors.title?.message && <span style={{ color: "Red" }}>{errors.title?.message}</span>}
 
         <p>
-          <label htmlFor="comments">Comment:</label><br />
-          <input type="text" id="comments" {...register("comments", { required: "Không được để trống!" })} /><br />
-          {errors.comments?.message && <span style={{ color: "Red" }}>{errors.comments?.message}</span>}
+          <label htmlFor="content">Content:</label><br />
+          <textarea className='w-full outline-none border p-4' {...register("content", { required: "Không được để trống!" })} name="content"  cols={30} rows={10}></textarea>
+          {errors.content?.message && <span style={{ color: "Red" }}>{errors.content?.message}</span>}
         </p>
         <p>
           <label htmlFor="categoryPost">Chọn loại bài viết:</label>

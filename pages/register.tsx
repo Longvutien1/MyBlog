@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 type FormInputs = {
     email: string,
@@ -48,6 +49,7 @@ const Register = () => {
         if (data.message) {
             alert(data.message)
         } else {
+            alert("Đăng kí tài khoản mới thành công")
             route.push("/login")
         }
 
@@ -56,10 +58,10 @@ const Register = () => {
     }
     return (
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8">
+            <div className="max-w-md w-full space-y-8 bg-white  drop-shadow-2xl px-8 py-16">
                 <div>
                     <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600" alt="Workflow" />
-                    <h2 className="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">Register</h2>
+                    <h2 className="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">Đăng kí tài khoản mới</h2>
 
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)} >
@@ -92,7 +94,7 @@ const Register = () => {
                             <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900"> Remember me </label>
                         </div>
                         <div className="text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+                           <Link href="/login"><a className="font-medium text-indigo-600 hover:text-indigo-500">Bạn đã có tài khoản ? </a></Link>
                         </div>
                     </div>
                     <div>

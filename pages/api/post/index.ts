@@ -32,7 +32,6 @@ export default async function handler(
       case "GET":
         const { title, categoryPost, page, allPost, topview } = req.query;
         if (allPost) {
-
           const { lisstAllPosts, count } = await listAllPost();
 
           return res.status(200).json({ lisstAllPosts, count });
