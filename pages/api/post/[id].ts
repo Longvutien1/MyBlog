@@ -13,7 +13,7 @@ export default async function handler(
       case "GET":
         console.log("Vào edit post");
         const { id: idQuery } = req.query;
-        console.log(idQuery);
+        // console.log(idQuery);
 
         const post = await prisma.post.findFirst({
           where: {
@@ -39,12 +39,12 @@ export default async function handler(
             data: { views: Number(views) + 1 },
           });
 
-          console.log("data +", editPost);
+          // console.log("data +", editPost);
           res.status(201).json(editPost);
         }
 
         if (likes) {
-          console.log("likes, userId:  ", likes, userId);
+          // console.log("likes, userId:  ", likes, userId);
 
           const userIsExist = await prisma.post.findFirst({
             where: {
@@ -54,7 +54,7 @@ export default async function handler(
               },
             },
           });
-          console.log("userIsExist", userIsExist?.isLike);
+          // console.log("userIsExist", userIsExist?.isLike);
           // console.log("userIsExist", userIsExist.length);
 
           if (userIsExist?.isLike !== undefined) {
@@ -69,7 +69,7 @@ export default async function handler(
                 },
               },
             });
-            console.log("isLikesisLikesisLikesisLikes", updateLike);
+            // console.log("isLikesisLikesisLikesisLikes", updateLike);
             return res.status(201).json({data:updateLike, mesage:"Thích"});
           } else {
          
@@ -84,7 +84,7 @@ export default async function handler(
                 },
               },
             });
-            console.log("isLikes23222 +", updateLike);
+            // console.log("isLikes23222 +", updateLike);
             return res.status(201).json({data:updateLike, message:"Đã thích"});
           }
 
@@ -97,14 +97,14 @@ export default async function handler(
             data: data,
           });
 
-          console.log("data +", editPost);
+          // console.log("data +", editPost);
           return res.status(201).json(editPost);
         }
 
         break;
       case "DELETE":
         const { id: idPost } = req.query;
-        console.log(idPost);
+        // console.log(idPost);
 
         const deletePost = await prisma.post.delete({
           where: { id: Number(idPost) },

@@ -8,6 +8,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 import { type } from 'os';
 import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import LayoutClient from '../../component/Layout';
 import { getUser } from '../../features/user/userSlice';
@@ -15,20 +16,25 @@ import styles from '../../styles/ListPost.module.css'
 import { PostType } from '../../type/types';
 type Props = {
   props: PostType
-} 
+}
+type FormComment = {
+  content: String
+}
 // { props }: Props
 const DetailPost = () => {
   const user = useSelector((item: any) => item.user.value)
   const dispatch = useDispatch();
   const [post, setPost] = useState<PostType>();
   const [liked, setLiked] = useState<String>();
+  const [comments, setComments] = useState<any>();
+  const {register, handleSubmit, formState:{errors}} = useForm<FormComment>();
   const route = useRouter();
   const { id } = route.query
 
   useEffect(() => {
     const userDetail = async () => {
       const { payload } = await dispatch(getUser())
-      console.log(payload);
+      // console.log(payload);
 
 
     }
@@ -44,27 +50,39 @@ const DetailPost = () => {
     //   console.log(props);
 
     // } else {
-      const listProduct = async (id: Number) => {
-        const detailPost = await axios.get(`/api/post/${id}`)
+    const listProduct = async (id: Number) => {
+      const detailPost = await axios.get(`/api/post/${id}`)
 
-        const { data } = await axios.patch(`/api/post/${id}?views=${detailPost.data.views}`)
-        setPost(data)
-        // setPost(data);
-      }
-      listProduct(Number(id));
+      const { data } = await axios.patch(`/api/post/${id}?views=${detailPost.data.views}`)
+      setPost(data)
+      // setPost(data);
+    }
+    listProduct(Number(id));
 
     // }
 
+    const listComments = async () => {
+        const {data } = await axios.get(`/api/comments/${id}`);
+        console.log("listComment", data );
+        setComments(data)
+    }
+    listComments();
   }, [])
-
+  
   const likePost = async () => {
     console.log("check like");
 
     const { data } = await axios.patch(`/api/post/${id}?likes=${post?.likes}&userId=${user?.id}`)
     setPost(data.data)
     setLiked(data.message)
+  }
 
-
+  const onComment = async (value:any) => {
+      console.log(value);
+      const {data} = await axios.post("/api/comments", {content:value.content, userId:user?.id, idPost: post?.id})
+      console.log("dataComment",data);
+      
+      setComments([...comments, data]);
   }
 
   return (
@@ -91,22 +109,22 @@ const DetailPost = () => {
             <h1>Social Share </h1>
             <div>
               <FacebookShareButton
-                url={`/posts/${id}`} >
+                url={`https://my-blog-eight-blush.vercel.app/posts/${id}`} >
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
 
               <PinterestShareButton
                 media={''}
                 description={"Printerest Long"}
-                url={`/posts/${id}`} >
+                url={`https://my-blog-eight-blush.vercel.app/posts/${id}`} >
                 <PinterestIcon size={32} round />
               </PinterestShareButton>
               <RedditShareButton
-                 url={`/posts/${id}`} >
+                url={`https://my-blog-eight-blush.vercel.app/posts/${id}`} >
                 <RedditIcon size={32} round />
               </RedditShareButton>
               <WhatsappShareButton
-                 url={`/posts/${id}`} >
+                url={`https://my-blog-eight-blush.vercel.app/posts/${id}`} >
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
             </div>
@@ -117,20 +135,26 @@ const DetailPost = () => {
       <div className='my-8 '>
         <h2 className='font-bold pb-2 border-b'>BÌNH LUẬN</h2>
         {/* <p>{post?.comments}</p> */}
-        <div className={styles.content}>
-          <div className={styles.info}>
-            <a ><img src="https://res.cloudinary.com/chanh-thon/image/upload/v1645342604/upload_preset/wkbpd6xv38ugjexk6dri.png" width={40} /></a>
-            <div>
-              <p>username</p>
+        {comments?.map((item:any, index:any) => {
+            return (
+              <div className={styles.content} key={index}>
+              <div className={styles.info}>
+                <a ><img src="https://res.cloudinary.com/chanh-thon/image/upload/v1645342604/upload_preset/wkbpd6xv38ugjexk6dri.png" width={40} /></a>
+                <div>
+                  <p>{item.user?.name}</p>
+                </div>
+              </div>
+              <div className="content-comment flex justify-between ">
+                <p style={{ paddingLeft: '4%' }}>{item.content}</p>
+                <p className="float-right my-auto line">{item.createdAt}</p>
+              </div>
             </div>
-          </div>
-          <div className="content-comment flex justify-between ">
-            <p style={{ paddingLeft: '4%' }}>${'{'}item.content{'}'}</p>
-            <p className="float-right my-auto line">${'{'}item.time{'}'}</p>
-          </div>
-        </div>
+            )
+        })
 
-        <div className={styles.content}>
+        }
+
+        {/* <div className={styles.content}>
           <div className={styles.info}>
             <a ><img src="https://res.cloudinary.com/chanh-thon/image/upload/v1645342604/upload_preset/wkbpd6xv38ugjexk6dri.png" width={40} /></a>
             <div>
@@ -141,11 +165,13 @@ const DetailPost = () => {
             <p style={{ paddingLeft: '4%' }}>${'{'}item.content{'}'}</p>
             <p className="float-right my-auto">${'{'}item.time{'}'}</p>
           </div>
-        </div>
-        {user ? <form id="formComment" style={{ border: '1px solid #E8E8E8', backgroundColor: '#E8E8E8', padding: '5px 10px' }}>
+        </div> */}
+        {user ?
 
-          <input type="text" id="commentInput" style={{ width: "100%", outline: "none" }} className="shadow-sm border-solid px-2 py-1 w-full mt-1 border focus:ring-indigo-500 focus:border-indigo-500 flex-1 block  rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Comment's here" />
-        </form>
+          <form id="formComment" onSubmit={handleSubmit(onComment)}  style={{ border: '1px solid #E8E8E8', backgroundColor: '#E8E8E8', padding: '5px 10px' }}>
+            <input type="text" {...register("content", {required:"Không được để trống"})} id="commentInput" style={{ width: "100%", outline: "none" }} className="shadow-sm border-solid px-2 py-1 w-full mt-1 border focus:ring-indigo-500 focus:border-indigo-500 flex-1 block  rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Comment's here" />
+          </form>
+
           : <p style={{ color: 'red', background: '#ddd', padding: '5px 10px' }}>Đăng nhập để bình luận về sản phẩm này</p>
 
         }
