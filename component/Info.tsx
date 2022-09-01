@@ -11,7 +11,7 @@ const Info = () => {
             >
             </Image>
             {/* <h1>Longchanhf thôn</h1> */}
-            <div className=' py-4 pb-8 text-center'>
+            <div className='  pb-8 text-center' style={{paddingTop:"8px", paddingBottom:"32px"}}>
                 <p> <b>VU TIEN LONG</b></p>
                 <p>Frontend Developer</p>
                 <p>05/02/2002</p>

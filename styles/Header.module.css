@@ -4,6 +4,7 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     width: 80%;
     margin: auto;
+  
 }
 .ul{
     @apply space-x-6 flex my-auto

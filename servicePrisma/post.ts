@@ -39,7 +39,7 @@ export const listAllPostAdmin = async (page: Number) => {
       user: true,
     },
     orderBy: {
-      id: "asc",
+      id: "desc",
     },
   });
   const count = await prisma.post.count();
