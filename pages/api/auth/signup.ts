@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   try {
     const user = req.body;
-    console.log(user);
+    console.log("Register", user);
    
     const salt = await bcrypt.genSalt(10);
      user.password = await bcrypt.hash(user.password, salt);

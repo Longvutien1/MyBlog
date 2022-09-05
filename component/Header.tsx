@@ -13,7 +13,6 @@ const Header = () => {
     // console.log(user.role);
     const userDetail = async () => {
       const  {data}  = await axios.get("/api/auth/signin");
-      console.log(data);
       setUser(data)
 
     }

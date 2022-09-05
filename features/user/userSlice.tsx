@@ -63,7 +63,7 @@ export const userSlice = createSlice({
     })
     builer.addCase(login.fulfilled, (state:any, action) => {
         state.value = [...state.value, action.payload]
-  })
+    })
 //   builer.addCase(getListPostByCategoryPost.fulfilled, (state, action) => {
 //     state.value = action.payload;
 // })

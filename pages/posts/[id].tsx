@@ -35,17 +35,17 @@ const DetailPost = () => {
   const route = useRouter();
   const { id } = route.query
   console.log("idididid", id);
-  
+
   useEffect(() => {
-   
-      const userDetail = async () => {
-        const { payload } = await dispatch(getUser())
-        // console.log(payload);
-  
-  
-      }
-      userDetail();
-  
+
+    const userDetail = async () => {
+      const { payload } = await dispatch(getUser())
+      // console.log(payload);
+
+
+    }
+    userDetail();
+
     // if (props) {
     //   console.log(props.views);
 
@@ -81,9 +81,13 @@ const DetailPost = () => {
   const likePost = async () => {
     console.log("check like");
 
-    const { data } = await axios.patch(`/api/post/${id}?likes=${post?.likes}&userId=${user?.id}`)
-    setPost(data.data)
-    setLiked(data.message)
+    if (user.message == "Hết hạn cookie") {
+      alert("Đăng nhập để có thể thích bài viết !")
+    }else{
+      const { data } = await axios.patch(`/api/post/${id}?likes=${post?.likes}&userId=${user?.id}`)
+      setPost(data.data)
+      setLiked(data.message)
+    }
   }
 
   const onComment = async (value: any) => {
@@ -93,6 +97,7 @@ const DetailPost = () => {
 
     setComments([...comments, data]);
   }
+  console.log(user);
 
   return (
     <div className='bg-[#F7F7F7]'>
@@ -190,13 +195,13 @@ const DetailPost = () => {
               }
 
 
-              {user ?
+              {user.message != "Hết hạn cookie" ?
 
                 <form id="formComment" onSubmit={handleSubmit(onComment)} style={{ border: '1px solid #E8E8E8', backgroundColor: '#E8E8E8', padding: '5px 10px' }}>
                   <input type="text" {...register("content", { required: "Không được để trống" })} id="commentInput" style={{ width: "100%", outline: "none" }} className="shadow-sm border-solid px-2 py-1 w-full mt-1 border focus:ring-indigo-500 focus:border-indigo-500 flex-1 block  rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="Comment's here" />
                 </form>
 
-                : <p style={{ color: 'red', background: '#ddd', padding: '5px 10px' }}>Đăng nhập để bình luận về sản phẩm này</p>
+                : <p style={{ color: 'red', background: '#ddd', padding: '5px 10px', margin: "24px 0" }}>Đăng nhập để bình luận về sản phẩm này</p>
 
               }
             </div>
